@@ -1,0 +1,7 @@
+1 line completed: 40 points
+2 lines completed: 100 points
+3 lines completed: 300 points
+4 lines completed (maximum): 1200 points
+
+These points are multiplied by (level + 1).
+The level is 0-9, level up each 10 lines completed.
