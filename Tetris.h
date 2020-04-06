@@ -14,6 +14,9 @@
 * Multi7Seg library by Florian Sorin (2018) 
 * https://github.com/flosorin/Multi7Seg.git
 * 
+* ButtonsController library by Florian Sorin (2020)
+* https://github.com/flosorin/ButtonsController.git
+* 
 ************************************************************************/
 
 #include <Multi7Seg.h>
@@ -21,6 +24,7 @@
 #include <Event.h>
 #include <Timer.h>
 #include <TimedAction.h>
+#include <ButtonsController.h>
 
 #include "TetrisPiece.h"
 
@@ -46,9 +50,4 @@
 #define PIN_DATA A2
 
 /* Buttons const */
-#define NONE 0
-#define LEFT 1 
-#define DOWN 2
-#define RIGHT 3
-#define UP 4
 #define PIN_BUTTONS A1

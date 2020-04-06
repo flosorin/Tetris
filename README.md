@@ -11,3 +11,5 @@ Classic Tetris game displayed on LED matrices by an Arduino UNO.
 [Peter Knight's TrueRandom library](http://code.google.com/p/tinkerit)
 
 [My own Multi7Seg library](https://github.com/flosorin/Multi7Seg.git)
+
+[My own ButtonsController library](https://github.com/flosorin/ButtonsController.git)

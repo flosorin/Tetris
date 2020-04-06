@@ -14,13 +14,15 @@
 * Multi7Seg library by Florian Sorin (2018) 
 * https://github.com/flosorin/Multi7Seg.git
 * 
+* ButtonsController library by Florian Sorin (2020)
+* https://github.com/flosorin/ButtonsController.git
+* 
 ************************************************************************/
 
 #include "Tetris.h"
 
 /* Buttons management */
-int buttonPressed = 0;
-int buttonsValue = NONE;
+ButtonsController buttons = ButtonsController(PIN_BUTTONS);
 
 /* Game variables */
 bool goDown = false; // Force the piece to go to its final position immediatly
@@ -55,8 +57,6 @@ void setup() {
 
   initMatrices(); // Initialize LEDs
 
-  pinMode(PIN_BUTTONS, INPUT_PULLUP); // Initialize buttons
-
   displayPiece(true);
   refreshNextPiece();
 
@@ -66,8 +66,8 @@ void setup() {
 void loop() {
    if (!isGameOver) {
     if (!goDown) {
-      readButtons();
-      switch (buttonsValue) {
+      buttons.updateButtonValue();
+      switch (buttons.getButtonValue()) {
         case LEFT: Serial.println("Left");
           if (!willBeCollisionSide(1)) {
             displayPiece(false);
@@ -121,29 +121,6 @@ void initMatrices() {
   nextPieceMatrix.shutdown(0, false); // Power saving off, activate chip
   nextPieceMatrix.setIntensity(0, 1); // Luminosity to 1 (values 0~15)
   nextPieceMatrix.clearDisplay(0); // Shutdown all LEDS
-}
-
-void readButtons() {
-  
-  buttonsValue = analogRead(PIN_BUTTONS); // Read raw value
-  /* Calibrate raw value */
-  //buttonsValue =  map (buttonsValue, 220, 600, 1, 5);
-  buttonsValue /= 100;
-  buttonsValue --;
-  
-  // After calibration, buttons return a number between 1 and 4
-  if (buttonsValue < 5) {
-    if (buttonPressed < 2) {
-      buttonPressed ++;
-    }
-  } else {
-    buttonPressed = 0;
-  }
-
-  /* Debouncing */
-  if (buttonPressed != 1) {
-    buttonsValue = NONE;
-  }
 }
 
 /* Turn on or off leds at piece coordinates */
