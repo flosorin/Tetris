@@ -94,7 +94,6 @@ void loop() {
       }
 
       movingTimer.update();
-      delay(2);
     } else {
       movePieceDown();
     }
