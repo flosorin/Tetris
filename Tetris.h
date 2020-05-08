@@ -1,9 +1,6 @@
 /************************************************************************
 * Classic Tetris game displayed on LED matrices by an Arduino UNO
 * https://github.com/flosorin/Tetris.git
-*
-* Using Simon Monk's Timer library
-* http://www.doctormonk.com/2012/01/arduino-timer-library.html
 * 
 * Using Eberhard Fahle's LedControl library  
 * http://wayoda.github.io/LedControl/
@@ -21,9 +18,6 @@
 
 #include <Multi7Seg.h>
 #include <LedControl.h>
-#include <Event.h>
-#include <Timer.h>
-#include <TimedAction.h>
 #include <ButtonsController.h>
 
 #include "TetrisPiece.h"

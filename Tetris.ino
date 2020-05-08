@@ -1,9 +1,6 @@
 /************************************************************************
 * Classic Tetris game displayed on LED matrices by an Arduino UNO
 * https://github.com/flosorin/Tetris.git
-*
-* Using Simon Monk's Timer library
-* http://www.doctormonk.com/2012/01/arduino-timer-library.html
 * 
 * Using Eberhard Fahle's LedControl library  
 * http://wayoda.github.io/LedControl/
@@ -44,8 +41,8 @@ int displayerPins[5] = {PIN_DIGIT0, PIN_DIGIT1, PIN_DIGIT2, PIN_DIGIT3, PIN_DIGI
 Multi7Seg displayers = Multi7Seg(NB_7_SEG, displayerPins, PIN_CLK_74HC595, PIN_LATCH, PIN_DATA);
 displayerValue dispValues[2] = {{0, 1}, {0, 4}}; // Initial level 0 with 1 digit, initial score 0 with 4 digits
 
-/* Timer to make the piece go down periodically */
-Timer movingTimer;
+/* Time management to make the piece go down periodically */
+unsigned long lastMvtDownTime = 0;
 
 /* Tetris current and next piece */
 TetrisPiece piece = TetrisPiece();
@@ -62,13 +59,15 @@ void setup() {
 
   displayPiece(true);
   refreshNextPiece();
-
-  movingTimer.every(1000, movePieceDown); // Initialize timer (refresh every second)
 }
 
 void loop() {
    if (!isGameOver) {
     if (!goDown) {
+      if ((millis() - lastMvtDownTime) > 1000) {
+        lastMvtDownTime = millis();
+        movePieceDown();
+      }
       buttons.updateButtonValue();
       switch (buttons.getButtonValue()) {
         case LEFT: Serial.println("Left");
@@ -92,11 +91,8 @@ void loop() {
           break;
         case DOWN: Serial.println("Down");
           goDown = true;
-          movingTimer.stop(0);
           break;
       }
-
-      movingTimer.update();
     } else {
       movePieceDown();
     }
@@ -265,7 +261,6 @@ void collisionManager() {
   
   /* If only one movement occured before the collision, then the game is over */
   if (nbMvtDown == 1) {
-    movingTimer.stop(1);
     gameOver();
   } else {
     nbMvtDown = 0;
@@ -281,7 +276,7 @@ void collisionManager() {
     /* Reset periodical movement variable */
     if (goDown) {
       goDown = false;
-      movingTimer.every(1000, movePieceDown); // Reset timer (refresh every second)
+      lastMvtDownTime = millis();
     }
   }
 }
