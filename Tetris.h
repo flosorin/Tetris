@@ -27,6 +27,7 @@
 #include <ButtonsController.h>
 
 #include "TetrisPiece.h"
+#include "TetrisMusic.h"
 
 /* MAX7219 managing game matrices pins */
 #define PIN_DATA_IN_GAME 13
@@ -51,3 +52,7 @@
 
 /* Buttons const */
 #define PIN_BUTTONS A1
+
+/* Music buzzer */
+#define PIN_BUZZER 2
+

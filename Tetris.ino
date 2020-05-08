@@ -51,6 +51,9 @@ Timer movingTimer;
 TetrisPiece piece = TetrisPiece();
 TetrisPiece nextPiece = TetrisPiece();
 
+/* Tetris music */
+TetrisMusic music = TetrisMusic(PIN_BUZZER);
+
 void setup() {
   
   Serial.begin(9600);
