@@ -48,12 +48,11 @@ unsigned long lastMvtDownTime = 0;
 TetrisPiece piece = TetrisPiece();
 TetrisPiece nextPiece = TetrisPiece();
 
-/* Tetris music */
-TetrisMusic music = TetrisMusic(PIN_BUZZER);
-
 void setup() {
   
   Serial.begin(9600);
+
+  initMusic(PIN_BUZZER);
 
   initMatrices(); // Initialize LEDs
 
