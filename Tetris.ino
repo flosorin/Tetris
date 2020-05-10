@@ -170,15 +170,16 @@ void refreshNextPiece() {
 
 /* Periodical movement of the piece management */
 void movePieceDown() {
-  
-  displayPiece(false);
-  piece.moveTetrisPieceDown();
-  displayPiece(true);
 
-  nbMvtDown ++;
-
+  // Check for collision before moving and not after to allow the player to move the piece one last time when in final bottom position
   if (isCollisionDown()) {
     collisionManager();
+  } else {
+    // Actually move the piece down
+    displayPiece(false);
+    piece.moveTetrisPieceDown();
+    displayPiece(true);
+    nbMvtDown ++;
   }
 }
 
@@ -258,8 +259,8 @@ void collisionManager() {
   }
   lastNbLines = nbLines;
   
-  /* If only one movement occured before the collision, then the game is over */
-  if (nbMvtDown == 1) {
+  /* If no movement occured before the collision, then the game is over */
+  if (nbMvtDown == 0) {
     gameOver();
   } else {
     nbMvtDown = 0;
