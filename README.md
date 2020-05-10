@@ -2,9 +2,9 @@
 
 Classic Tetris game displayed on LED matrices by an Arduino UNO. 
 
-## Libraries needed
+The famous music of the game is also played using a buzzer oscillated at the right frequencies.
 
-[Simon Monk's Timer library](http://www.doctormonk.com/2012/01/arduino-timer-library.html)
+## Libraries needed
 
 [Eberhard Fahle's LedControl library](http://wayoda.github.io/LedControl/)
 
